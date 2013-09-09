@@ -1,9 +1,9 @@
 #!/bin/bash
-$script_dir = pwd
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 echo "***********************************************************************"
 echo "*                                                                     *"
-echo "* Ubuntu MONO Server Install v0.5	                                    *"
-echo "* -------------------------------------------------------------	    *"
+echo "* Ubuntu MONO Server Install v0.5                                     *"
+echo "* -------------------------------------------------------------       *"
 echo "* This script will build and install the latest stable version of     *"
 echo "* mono [3.2.1] and install nginx, fastcgi-mono-server4 to run .net 4  *" 
 echo "* applications.                                                       *"
@@ -20,7 +20,7 @@ select yn in "Yes" "No"; do
         Yes )  
        
 		echo "make sure apt-get is updated"
-		apt-get update
+		apt-get updat
 		echo "remove packages that are no longer needed"
 		apt-get autoremove
 
@@ -60,7 +60,7 @@ select yn in "Yes" "No"; do
 		./autogen.sh --prefix=/usr 
 		make
 		make install
-		
+					
 		echo "Removing apache and installing nginx"
 		service apache2 stop
 		apt-get remove apache2
@@ -68,8 +68,7 @@ select yn in "Yes" "No"; do
 		service nginx start
 		
 		echo "Creating start up script for fastcgi-mono-server4"
-		DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-		cd "$DIR"
+		cd $DIR
 		cp monoserve /etc/init.d/
 		chmod +x /etc/init.d/monoserve
 		echo "fastcgi-mono-server4 starting tcp:127.0.0.1:9000"
