@@ -23,7 +23,7 @@ case "$1" in
         start)
                 if [ -z "${MONOSERVER_PID}" ]; then
                         echo "starting mono server"
-                        ${MONOSERVER} /appconfigdir=${WEBAPPS} /socket=tcp:127.0.0.1:9000 /logffile=/var/log/mono/fastcgi.log &
+                        ${MONOSERVER} /appconfigdir=${WEBAPPS} /socket=tcp:127.0.0.1:9000 /logfile=/var/log/mono/fastcgi.log &
                         echo "mono server started"
                 else
                         echo ${WEBAPPS}
